@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { WebhookEvent } from '@clerk/clerk-sdk-node';
-import { clerkClient } from '@clerk/clerk-sdk-node/dist/types/clerkClient';
+import { WebhookEvent, clerkClient } from '@clerk/clerk-sdk-node';
 
 export default async function handler(
 	req: NextApiRequest,
