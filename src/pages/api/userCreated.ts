@@ -6,7 +6,7 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<any>
 ) {
-	const evt = req.body.evt as WebhookEvent;
+	const evt = req.body as WebhookEvent;
 	if (evt.type === 'user.created') {
 		//get userlist from clerk
 		await clerkClient.users.updateUser(evt.data.id, {
@@ -14,7 +14,6 @@ export default async function handler(
 				role: 'USER',
 			},
 		});
-
-		res.send('ok');
 	}
+	res.status(200).json({ status: 'ok' });
 }
