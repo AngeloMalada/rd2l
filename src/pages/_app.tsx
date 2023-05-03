@@ -3,9 +3,12 @@ import {
 	SignedIn,
 	SignedOut,
 	RedirectToSignIn,
+	SignIn,
 } from '@clerk/nextjs';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import '../styles/globals.css';
+import { dark, neobrutalism } from '@clerk/themes';
 
 //  List pages you want to be publicly accessible, or leave empty if
 //  every page requires authentication. Use this naming strategy:
@@ -25,7 +28,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 	// If the current route is listed as public, render it directly
 	// Otherwise, use Clerk to require authentication
 	return (
-		<ClerkProvider {...pageProps}>
+		<ClerkProvider
+			appearance={{
+				baseTheme: neobrutalism,
+			}}
+			{...pageProps}
+		>
 			{isPublicPage ? (
 				<Component {...pageProps} />
 			) : (
@@ -34,7 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 						<Component {...pageProps} />
 					</SignedIn>
 					<SignedOut>
-						<RedirectToSignIn />
+						<div className='h-screen flex justify-center items-center bg-[#151515]'>
+							<SignIn />
+						</div>
 					</SignedOut>
 				</>
 			)}
